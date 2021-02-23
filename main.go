@@ -15,3 +15,7 @@ func main() {
 	r.Run()
 
 }
+
+func showaja() {
+
+}
