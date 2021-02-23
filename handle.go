@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,7 +17,7 @@ func showuser(c *gin.Context) {
 			panic(err.Error()) // proper error handling instead of panic in your app
 		}
 		// and then print out the tag's Name attribute
-		fmt.Println(user.nama)
+
 	}
 	dbs()
 	// dbs().Create(&User{nama: "cecep", email: "asd@100", alamat: "rawang"})
