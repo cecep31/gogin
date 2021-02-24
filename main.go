@@ -11,6 +11,9 @@ func main() {
 		c.String(200, "asik")
 	})
 	r.GET("/api/user", showuser)
+	r.GET("/api/product", showuser)
+	r.POST("/api/product", showuser)
+	r.DELETE("/api/product", showuser)
 
 	r.Run()
 
