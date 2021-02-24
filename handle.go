@@ -5,7 +5,8 @@ import (
 )
 
 func showuser(c *gin.Context) {
-	results, err := dbs().Query("SELECT * FROM users where id = 1")
+	var users []User
+	results, err := dbs().Query("SELECT * FROM users")
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
 	}
@@ -17,11 +18,13 @@ func showuser(c *gin.Context) {
 			panic(err.Error()) // proper error handling instead of panic in your app
 		}
 		// and then print out the tag's Name attribute
+		users = append(users, user)
 
 	}
+
 	dbs()
 	// dbs().Create(&User{nama: "cecep", email: "asd@100", alamat: "rawang"})
 	// dbs().First(&user, 1).Scan(&user)
 	defer dbs().Close()
-	c.JSON(200, user)
+	c.JSON(200, users)
 }

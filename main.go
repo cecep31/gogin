@@ -10,7 +10,7 @@ func main() {
 	r.GET("/", func(c *gin.Context) {
 		c.String(200, "asik")
 	})
-	r.GET("/user", showuser)
+	r.GET("/api/user", showuser)
 
 	r.Run()
 
