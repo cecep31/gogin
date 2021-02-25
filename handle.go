@@ -6,14 +6,14 @@ import (
 
 func showuser(c *gin.Context) {
 	var users []User
-	results, err := dbs().Query("SELECT * FROM users")
+	results, err := dbs().Query("SELECT ID,nama FROM users")
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
 	}
 	var user User
 	for results.Next() {
 		// for each row, scan the result into our tag composite object
-		err = results.Scan(&user.ID, &user.Createdat, &user.Updatedat, &user.Nama, &user.Email)
+		err = results.Scan(&user.ID, &user.Nama)
 		if err != nil {
 			panic(err.Error()) // proper error handling instead of panic in your app
 		}
