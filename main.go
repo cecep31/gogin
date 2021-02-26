@@ -13,12 +13,7 @@ func main() {
 	r.GET("/api/user", showuser)
 	r.GET("/api/product", showuser)
 	r.POST("/api/product", showuser)
-	r.DELETE("/api/product", showuser)
 
 	r.Run()
-
-}
-
-func showaja() {
 
 }
