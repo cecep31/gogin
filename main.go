@@ -1,19 +1,16 @@
 package main
 
 import (
+	"github.com/cecep31/gogin/controllers"
+	"github.com/cecep31/gogin/models"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
 
-	r.GET("/", func(c *gin.Context) {
-		c.String(200, "asik")
-	})
-	r.GET("/api/user", showuser)
-	r.GET("/api/product", showuser)
-	r.POST("/api/product", showuser)
-
+	models.Connectdb()
+	r.GET("/books", controllers.Findbooks)
 	r.Run()
 
 }
