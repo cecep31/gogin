@@ -5,7 +5,9 @@ import (
 	"gorm.io/gorm"
 )
 
+// Connectdb sadasd
 func Connectdb() *gorm.DB {
+
 	dsn := "pilput:pilput31@tcp(127.0.0.1:3306)/gogin?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
