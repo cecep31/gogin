@@ -18,8 +18,9 @@ func FindBooks(c *gin.Context) {
 }
 
 type CreateBookInput struct {
-	Title  string `json:"title" binding:"required"`
-	Author string `json:"author" binding:"required"`
+	Title       string `json:"title" binding:"required"`
+	Author      string `json:"author" binding:"required"`
+	Description string `json:"description" binding:"required"`
 }
 
 func CreateBook(c *gin.Context) {
@@ -29,7 +30,7 @@ func CreateBook(c *gin.Context) {
 			"error": err.Error(),
 		})
 	}
-	book := models.Book{Title: input.Title, Author: input.Author}
+	book := models.Book{Title: input.Title, Author: input.Author, Description: input.Description}
 	models.Connectdb().Create(&book)
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
@@ -45,8 +46,9 @@ func FindBook(c *gin.Context) {
 }
 
 type UpdateBookInput struct {
-	Title  string `json:"title"`
-	Author string `json:"author"`
+	Title       string `json:"title"`
+	Author      string `json:"author"`
+	Description string `json:"description"`
 }
 
 func UpdateBook(c *gin.Context) {
@@ -64,7 +66,7 @@ func UpdateBook(c *gin.Context) {
 		return
 	}
 
-	models.Connectdb().Model(&book).Updates(models.Book{Title: input.Title, Author: input.Author})
+	models.Connectdb().Model(&book).Updates(models.Book{Title: input.Title, Author: input.Author, Description: input.Description})
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
