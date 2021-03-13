@@ -16,6 +16,6 @@ func main() {
 	r.GET("/book/:id", controllers.FindBook)
 	r.PATCH("/book/:id", controllers.UpdateBook)
 	r.DELETE("/book/:id", controllers.DeleteBook)
-	r.Run()
+	r.Run(":8070")
 
 }
