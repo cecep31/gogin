@@ -3,13 +3,14 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/cecep31/gogin/config"
 	"github.com/cecep31/gogin/models"
 	"github.com/gin-gonic/gin"
 )
 
 func FindBooks(c *gin.Context) {
 	var books []models.Book
-	models.Connectdb().Find(&books)
+	config.Connectdb().Find(&books)
 
 	c.JSON(http.StatusOK, gin.H{
 		"buku": books,
@@ -31,14 +32,14 @@ func CreateBook(c *gin.Context) {
 		})
 	}
 	book := models.Book{Title: input.Title, Author: input.Author, Description: input.Description}
-	models.Connectdb().Create(&book)
+	config.Connectdb().Create(&book)
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 func FindBook(c *gin.Context) {
 	var book models.Book
 	idbook := c.Param("id")
-	if err := models.Connectdb().Where("id = ?", idbook).First(&book).Error; err != nil {
+	if err := config.Connectdb().Where("id = ?", idbook).First(&book).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
@@ -54,7 +55,7 @@ type UpdateBookInput struct {
 func UpdateBook(c *gin.Context) {
 	// Get model if exist
 	var book models.Book
-	if err := models.Connectdb().Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
+	if err := config.Connectdb().Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
@@ -66,16 +67,16 @@ func UpdateBook(c *gin.Context) {
 		return
 	}
 
-	models.Connectdb().Model(&book).Updates(models.Book{Title: input.Title, Author: input.Author, Description: input.Description})
+	config.Connectdb().Model(&book).Updates(models.Book{Title: input.Title, Author: input.Author, Description: input.Description})
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 func DeleteBook(c *gin.Context) {
 	var book models.Book
-	if err := models.Connectdb().Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
+	if err := config.Connectdb().Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
-	models.Connectdb().Delete(&book)
+	config.Connectdb().Delete(&book)
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }

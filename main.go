@@ -1,15 +1,15 @@
 package main
 
 import (
+	"github.com/cecep31/gogin/config"
 	"github.com/cecep31/gogin/controllers"
-	"github.com/cecep31/gogin/models"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
 	// connect databases
-	models.Connectdb()
+	config.Connectdb()
 
 	r.GET("/book", controllers.FindBooks)
 	r.POST("/book", controllers.CreateBook)
